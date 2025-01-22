@@ -46,12 +46,10 @@ router.get('/getemp/:id', async (req, res) => {
     try {
       const dataId = req.params.id;
   
-      // Check if the ID is a valid ObjectId
       if (!mongoose.Types.ObjectId.isValid(dataId)) {
         return res.status(400).json({ message: "Invalid employee ID" });
       }
   
-      // Convert the string ID to an ObjectId using the new keyword
       const employee = await empmodel.findById(new mongoose.Types.ObjectId(dataId));
   
       if (!employee) {
@@ -72,16 +70,14 @@ router.get('/getemp/:id', async (req, res) => {
     try {
       const dataId = req.params.id;
   
-      // Check if the ID is a valid ObjectId
       if (!mongoose.Types.ObjectId.isValid(dataId)) {
         return res.status(400).json({ message: "Invalid employee ID" });
       }
   
-      // Find the employee by ID and update the document with new data
       const updatedEmployee = await empmodel.findByIdAndUpdate(
-        dataId, // Find the employee by ID
-        req.body, // Update the employee data with the data from the request body
-        { new: true } // Return the updated document instead of the original one
+        dataId, 
+        req.body, 
+        { new: true } 
       );
   
       if (!updatedEmployee) {
